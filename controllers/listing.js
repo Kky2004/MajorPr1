@@ -23,7 +23,12 @@ module.exports.searchListing= async(req,res)=>{
   const searchLocation = req.query.location || "";
   const filter ={};
   if(searchLocation){
-    filter.location = new RegExp(`^${searchLocation.trim()}$`, 'i');
+    // filter.location = new RegExp(`^${searchLocation.trim()}$`, 'i');
+    const regex = new RegExp(searchLocation.trim(), 'i'); // case-insensitive partial match
+    filter.$or = [
+      { location: regex },
+      { country: regex }
+    ];
     const alllistings = await Listing.find(filter);
     res.render("listings/index", { alllistings});
   }

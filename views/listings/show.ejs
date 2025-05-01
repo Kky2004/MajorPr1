@@ -1,33 +1,44 @@
 <%layout("/layouts/boilerplate")%>
 
-  <div class="row ">
-    <div class="col-6 offset-4">
+<style>
+  body {
+    overflow-x: hidden;
+  }
+  
+  
+</style>
+ <div class="container">
+  <div class="row  ms-lg-5">
+    <div class="col-8 offset-lg-1 ">
       <h3>
         <%=listing.title%>
       </h3>
     </div>
-    <div class="card col-4 offset-4 listing-card">
-      <img src="<%=listing.image.url%>" class="card-img-top show-img" alt="listing-image">
-
+    <div class="card col-12 col-md-8 col-lg-5 offset-md-2 offset-lg-1 listing-card">
+      <img src="<%=listing.image.url%>" class="card-img-top show-img img-fluid" alt="listing-image">
       <div class="card-body">
-        <p class="card-text"> <b> Owned by <%=listing.Owner.username%> </b> </p>
-        <p class="card-text">
+        <p class="card-text  "> <b> Owned by <%=listing.Owner.username%> </b> </p>
+        <p class="card-text mx-3">
           <%=listing.description%>
         </p>
-        <p class="card-text"> &#8377 <%=listing.price.toLocaleString("en-IN")%> </p>
-        <p class="card-text">
+        <p class="card-text mx-3"> &#8377 <%=listing.price.toLocaleString("en-IN")%> </p>
+        <p class="card-text mx-3">
           <%=listing.location%>,
           <b><%=listing.country%></b>
         </p>
       </div>
     </div>
     <br>
+
+    
     <%if(currUser && currUser._id.equals(listing.Owner._id)){%>
-      <div class="btns">
-        <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark col-1 offset-4 edit-btn mb-2">Edit </a> <br> <br>
+      <div class="btns ">
+        <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark col-4 offset-1 col-md-2 offset-md-2 col-lg-1 offset-lg-2 d-block  edit-btn mb-2">Edit </a> <br> <br>
+        <div class="col-4 col-md-2 col-lg-1">
         <form action="/listings/<%=listing._id%>?_method=DELETE" method="POST">
-          <button class="btn btn-dark   offset-5">Delete</button>
+          <button class="btn btn-dark  w-100  offset-5">Delete</button>
         </form>
+      </div>
       </div>
       <%}%>
 
@@ -35,7 +46,7 @@
         <hr>
 
         <%if(currUser){%>
-          <div class="col-8 offset-3 mb-3">
+          <div class="col-8 ms-5">
             <h4>Leave a Review</h4>
             <form action="/listings/<%=listing._id%>/review" method="POST" novalidate class="needs-validation">
 
@@ -74,9 +85,9 @@
               
            <% if(listing.reviews.length>0){%>
               <div class="row ">
-                <p class="offset-3"> <b>All Reviews </b></p>
+                <p class=""> <b>All Reviews </b></p>
                 <%for(review of listing.reviews){%>
-                  <div class="card col-5 ms-3 mb-3">
+                  <div class="card col-12  col-md-6  col-lg-5  mx-lg-4 mb-3">
                     <div class="card-body">
                       <h5 class="card-title"> @<%=review.author.username%>
                       </h5>
@@ -95,10 +106,11 @@
               </div>
             <%}%>  
           </div>
-          <div class="col-6 offset-3 mb-3">
+          <div class="col-8 mb-3 ms-5">
             <h3>Where You'll be</h3>
-            <div id="map" style="height: 350px;"></div>
+            <div id="map" style="height: 230px; "></div>
           </div>
   </div>
+</div>
   <script src="/js/map.js"></script>
   
