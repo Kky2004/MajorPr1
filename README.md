@@ -1,4 +1,4 @@
-# MajorPr1 🚀
+# Wanderlust 🚀
 
 ## 📌 Project Overview
 **MajorPr1** is a full-stack project developed as part of an academic major project.  
